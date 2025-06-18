@@ -1,0 +1,151 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYN™のご紹介</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <div class="max-w-3xl mx-auto p-8">
+    <h1 class="text-4xl font-bold mb-4">SYN™ 学力補強テスト</h1>
+    <p class="mb-6 text-lg leading-relaxed">
+      SYN™（シン）は、学力の“抜け”を見つけ、効率よく補強するための個別設計型テストです。<br/>
+      画一的な模試では測れない「あなたに必要な問題」だけを抽出し、最短距離での成長を支援します。<br/><br/>
+      このテストでは、あなたの<strong>得意/不得意</strong>、<strong>伸ばしたい分野</strong>、<strong>好きな教科/嫌いな単元</strong>に基づいて、オーダーメイドの設問が作られます。<br/><br/>
+      また、受験形式はオンラインと郵送の2種類を用意しており、通信環境や学習スタイルに合わせた柔軟な選択が可能です。
+      <ul class="list-disc list-inside text-gray-700 mt-4">
+        <li><strong>郵送テスト:</strong> ご自宅に問題を郵送、記述式で解答して返送（1ヶ月以上先の日程のみ選択可能）</li>
+        <li><strong>オンラインテスト:</strong> メールで問題を配布、GoogleフォームやPDFで提出</li>
+      </ul>
+      <br/>
+      資格・検定試験の対策テストも可能です。英検・数検・TOEIC など、備考欄に記載してください。<br/><br/>
+      SYN™は「今のあなた」に合わせて一から作られる、唯一無二の試験です。<br/>
+      勉強に悩んでいる人、自信が持てない人、あるいは自分の力を測ってみたい人にこそ、ぜひ挑戦してほしい内容です。<br/><br/>
+      あなたの声をもとに、テストが生まれます。ぜひ、下記フォームからエントリーしてください。
+    </p>
+  </div>
+</body>
+</html>
+
+<!-- entry.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYN™ エントリーフォーム</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-xl mx-auto p-6 mt-10 bg-white shadow-md rounded-xl">
+    <h1 class="text-2xl font-bold mb-4">SYN™ 参加エントリー</h1>
+
+    <form id="entryForm">
+      <div class="mb-4">
+        <label class="block text-sm font-medium">名前</label>
+        <input name="name" type="text" required class="mt-1 w-full p-2 border rounded" />
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium">年齢</label>
+        <input name="age" type="number" required class="mt-1 w-full p-2 border rounded" />
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium">性別</label>
+        <select name="sex" required class="mt-1 w-full p-2 border rounded">
+          <option value="">選択してください</option>
+          <option>男</option>
+          <option>女</option>
+          <option>その他</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium">希望科目</label>
+        <input name="subject" type="text" required class="mt-1 w-full p-2 border rounded" />
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium">希望受験日</label>
+        <input name="date" type="date" required class="mt-1 w-full p-2 border rounded" />
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium">受験形式</label>
+        <select name="mode" required class="mt-1 w-full p-2 border rounded">
+          <option value="">選択してください</option>
+          <option value="online">オンライン</option>
+          <option value="mail">郵送</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium">メールアドレス</label>
+        <input name="email" type="email" required class="mt-1 w-full p-2 border rounded" />
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium">住所（郵送希望者のみ）</label>
+        <textarea name="address" rows="3" class="mt-1 w-full p-2 border rounded"></textarea>
+      </div>
+      <div class="mb-6">
+        <label class="block text-sm font-medium">補足（得意・不得意、受験目的など）</label>
+        <textarea name="remarks" rows="4" class="mt-1 w-full p-2 border rounded" placeholder="資格・検定試験の対策なども記載してください"></textarea>
+      </div>
+
+      <button type="submit" class="w-full py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700">
+        送信する
+      </button>
+      <p id="resultMessage" class="mt-4 text-center text-sm text-green-600 hidden">送信されました！</p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('entryForm');
+    const resultMessage = document.getElementById('resultMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const missingFields = [];
+      const name = form.name.value.trim();
+      const age = form.age.value.trim();
+      const sex = form.sex.value;
+      const subject = form.subject.value.trim();
+      const date = form.date.value;
+      const mode = form.mode.value;
+      const email = form.email.value.trim();
+      const address = form.address.value.trim();
+
+      if (!name) missingFields.push("名前");
+      if (!age) missingFields.push("年齢");
+      if (!sex) missingFields.push("性別");
+      if (!subject) missingFields.push("希望科目");
+      if (!date) missingFields.push("希望受験日");
+      if (!mode) missingFields.push("受験形式");
+      if (!email) missingFields.push("メールアドレス");
+      if (mode === "mail" && !address) missingFields.push("住所");
+
+      const now = new Date();
+      const selectedDate = new Date(date);
+      const oneMonthLater = new Date();
+      oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+
+      if (mode === "mail" && selectedDate < oneMonthLater) {
+        alert("郵送受験の場合、希望日は最低でも1ヶ月以上先にしてください。");
+        return;
+      }
+
+      if (missingFields.length > 0) {
+        alert("以下の項目を入力してください: " + missingFields.join(", "));
+        return;
+      }
+
+      const data = new FormData(form);
+      await fetch("https://script.google.com/macros/s/AKfycbztra3hEQE7bg6BdQBJ34KaSCZC_9r_8d0gVgPzBc5-ubL208_nqcB_mh1cmUGhwd3h/exec", {
+        method: "POST",
+        body: data
+      });
+
+      resultMessage.classList.remove('hidden');
+      form.reset();
+    });
+  </script>
+</body>
+</html>
